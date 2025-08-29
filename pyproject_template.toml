@@ -1,0 +1,116 @@
+[build-system]
+requires = ["setuptools>=60", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smart-analysis-agent"
+version = "0.1.0"
+description = "LangGraph-based LLM agent for domain-agnostic data analysis and insights"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+readme = "README_TEMPLATE.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Data Scientists",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    # Core LangGraph and LangChain dependencies
+    "langgraph>=0.5.1",
+    "langchain>=0.3.0",
+    "langchain-core>=0.3.0",
+    "langchain-community>=0.3.0",
+    "langchain-openai>=0.2.0",
+    "langchain-anthropic>=0.2.0",
+    "langchain-google-genai>=2.0.0",
+    # Pydantic for data validation
+    "pydantic>=2.8.0",
+    # FastAPI for web API
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    # Authentication
+    "pyjwt>=2.8.0",
+    # PostgreSQL database connectivity
+    "asyncpg>=0.29.0",
+    "langgraph-checkpoint-postgres>=2.0.20",
+    "psycopg[binary,pool]>=3.2.9",
+    # Data handling and analysis
+    "pandas>=2.2.0",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+    # Environment and configuration
+    "python-dotenv>=1.0.0",
+    # Async support
+    "aiofiles>=24.1.0",
+    "aiohttp>=3.10.0",
+    # Logging
+    "structlog>=24.4.0",
+    # Type hints
+    "typing-extensions>=4.12.0",
+    # JSON handling
+    "orjson>=3.10.0",
+    # Serialization
+    "msgpack>=1.1.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "black>=24.0.0",
+    "ruff>=0.6.0",
+    "mypy>=1.11.0",
+]
+test = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "httpx>=0.27.0",        # For FastAPI testing
+    "aiohttp>=3.10.0",      # For async HTTP requests in load tests
+    "requests>=2.32.0",     # For synchronous HTTP requests
+]
+
+[project.scripts]
+smart-analysis = "smart_analysis_main:main"
+smart-analysis-api = "src.smart_analysis_agent.api:main"
+
+[project.urls]
+Homepage = "https://github.com/your-username/smart-analysis-agent"
+Repository = "https://github.com/your-username/smart-analysis-agent"
+Issues = "https://github.com/your-username/smart-analysis-agent/issues"
+Documentation = "https://github.com/your-username/smart-analysis-agent/blob/main/README_TEMPLATE.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true 
+
+[dependency-groups]
+test = [
+    "aiohttp>=3.12.13",
+    "httpx>=0.28.1",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.0.0",
+    "requests>=2.32.4",
+]
